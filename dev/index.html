@@ -1,1 +1,23 @@
-Test 3
+<!doctype html>
+<html lang="en" x-ng-app="mediaServer">
+<head>
+    <meta charset="utf-8">
+    <title>Dev</title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
+    <script src="js/app.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+</head>
+<body x-ng-controller="MovieListController as movListCtrl" class="text-center">
+    
+    <p>{{movListCtrl.date | date: "dd-MMM-yy HH:mm:ss"}}</p>
+    
+    <input x-ng-model="order" type="radio" value="title">Sort Asc</input>
+    <input x-ng-model="order" type="radio" value="-title">Sort Desc</input>
+
+    
+    <div x-ng-repeat="movie in movListCtrl.movies | orderBy:order">
+        {{movie.title}}<br>
+    </div>
+    
+</body>
+</html>
