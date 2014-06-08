@@ -22,17 +22,22 @@
 //Step 2 - process from an external source
 (function(){
 
-    var app = angular.module('mediaServer', []);
+   var app = angular.module('mediaServer', []);
     
     app.controller('MovieListController', ['$http', function($http){
         var mlc = this; //needed for the $http request
         
         this.date = Date.now();
         this.movies = []; //Initialise with an empty array so there are no errors whilst we fetch the data.
-
+        this.loaded = false; //used to hide/show progress bar
+        this.error = false;
         
         $http.get('api/movies.json').success(function(data){
             mlc.movies = data; //can't use 'this' here to refer to the array, as 'this' in the current scope is $http
+            mlc.loaded = true;
+        }).error(function(data){
+            mlc.error = true;
         });
+        
     }]);
 })();

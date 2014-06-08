@@ -5,19 +5,33 @@
     <title>Dev</title>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/progress.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
 </head>
 <body x-ng-controller="MovieListController as movListCtrl" class="text-center">
-    
+    <h3>Movie List</h3>
     <p>{{movListCtrl.date | date: "dd-MMM-yy HH:mm:ss"}}</p>
-    
-    <input x-ng-model="order" type="radio" value="title">Sort Asc</input>
-    <input x-ng-model="order" type="radio" value="-title">Sort Desc</input>
-
-    
-    <div x-ng-repeat="movie in movListCtrl.movies | orderBy:order">
-        {{movie.title}}<br>
+  
+    <div x-ng-hide="movListCtrl.loaded || movListCtrl.error"> <!--Don't include the {{}} braces when inserting like this-->
+        <p>Please wait - loading!<br>
+        <progress></progress></p>
     </div>
+    <div x-ng-show="movListCtrl.error">
+        An error has occured - unable to retrieve list.
+    </div>
+    
+    <div x-ng-show="movListCtrl.loaded" class="center-block">
+        <input x-ng-model="order" x-ng-init="order='title'" type="radio" value="title" x-ng-checked="movListCtrl.loaded">Sort Asc</input>
+        <input x-ng-model="order" type="radio" value="-title">Sort Desc</input>
+        <br><br>
+        <table style="margin-left:auto; margin-right:auto">
+            <tr x-ng-repeat="movie in movListCtrl.movies | orderBy:order">
+                <td><img height="100px" src="https://image.tmdb.org/t/p/w185{{movie.image}}" /></td><td>{{movie.title}}</td>
+            </tr>
+        </table>
+    </div>
+    
+   
     
 </body>
 </html>
