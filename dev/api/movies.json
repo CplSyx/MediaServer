@@ -1,5 +1,7 @@
 <?php
-/*$movies = array();
+/* //Okay so this is phase one
+
+$movies = array();
 $directory = '\\\\video\\Movies';
 $scanned_directory = array_diff(scandir($directory), array('..', '.'));
 $i = 0;
@@ -26,6 +28,8 @@ foreach($scanned_directory as $item)
     }
 }
 echo json_encode($movies);*/
+/*
+//Phase 2 - working but VERY slow due to connection and reads etc... getting a DB up and running to fix this issue.
 $movies = array();
 $directory = '\\\\video\\Movies';
 $scanned_directory = array_diff(scandir($directory), array('..', '.'));
@@ -62,4 +66,38 @@ if($i > 50) break; //Currently this is taking too long and fails if full list is
 
 curl_close($ch); // All done, close curl object
 echo json_encode($movies); //only thing we should return is our completed json
+*/
+//Phase 3, we're using a SQL DB now!
+require("dbconn_lib.php");
+$connectionInfo = getConnectionString("MediaServer");
+$serverName = "home.cplsyx.com";
+$conn = sqlsrv_connect( $serverName, $connectionInfo);
+if( $conn !== false )
+{
+    $query = sqlsrv_query($conn, 'SELECT * FROM [dbo].[Movies]');
+
+    // Check if there were any records
+    if ($query !== false)
+    {
+        echo '<ul>';
+
+        while ($row = sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)) 
+        {
+            echo "<pre>"; print_r($row); echo "</pre>";
+        }
+
+        echo '</ul>';
+        
+        // Free the query result
+        sqlsrv_free_stmt($query);
+    }
+    else
+    {
+        print_r( sqlsrv_errors());
+      
+    }
+
+    
+ 
+}
 ?>
