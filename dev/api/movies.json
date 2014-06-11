@@ -1,5 +1,5 @@
 <?php
-/* //Okay so this is phase one
+/*///Okay so this is phase one
 
 $movies = array();
 $directory = '\\\\video\\Movies';
@@ -7,7 +7,7 @@ $scanned_directory = array_diff(scandir($directory), array('..', '.'));
 $i = 0;
 foreach($scanned_directory as $item)
 {
-    if($i>20) break;
+    if($i>0) break;
     if((strpos($item, "!") !== 0) && (is_dir($directory."\\".$item)))
     {
         $item = rtrim($item, " x");
@@ -67,6 +67,7 @@ if($i > 50) break; //Currently this is taking too long and fails if full list is
 curl_close($ch); // All done, close curl object
 echo json_encode($movies); //only thing we should return is our completed json
 */
+
 //Phase 3, we're using a SQL DB now!
 require("dbconn_lib.php");
 $connectionInfo = getConnectionString("MediaServer");
@@ -79,16 +80,8 @@ if( $conn !== false )
     // Check if there were any records
     if ($query !== false)
     {
-        echo '<ul>';
+        $row = json_encode(array(sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)));
 
-        while ($row = sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)) 
-        {
-            echo "<pre>"; print_r($row); echo "</pre>";
-        }
-
-        echo '</ul>';
-        
-        // Free the query result
         sqlsrv_free_stmt($query);
     }
     else
@@ -100,4 +93,5 @@ if( $conn !== false )
     
  
 }
+echo $row;
 ?>
