@@ -21,12 +21,14 @@
     </div>
     
     <div x-ng-show="movListCtrl.loaded" class="center-block">
-        <input x-ng-model="order" x-ng-init="order='title'" type="radio" value="title" x-ng-checked="movListCtrl.loaded">Sort Asc</input>
-        <input x-ng-model="order" type="radio" value="-title">Sort Desc</input>
+        <input x-ng-model="order" x-ng-init="order='imdbTitle'" type="radio" value="imdbTitle" x-ng-checked="movListCtrl.loaded">Sort Asc</input>
+        <input x-ng-model="order" type="radio" value="-imdbTitle">Sort Desc</input>
+        <br><br>
+        {{movListCtrl.movies.length}} Movies
         <br><br>
         <table style="margin-left:auto; margin-right:auto">
-            <tr x-ng-repeat="movie in movListCtrl.movies | orderBy:order">
-                <td><img height="100px" src="https://image.tmdb.org/t/p/w185{{movie.moviedbImage}}" /></td><td>{{movie.imdbTitle}} ({{movie.imdbYear}})</td>
+            <tr x-ng-repeat="movie in movListCtrl.movies | orderBy:order"  x-ng-bind-html="movie.imdbTitle">
+                <td><img height="100px" src="https://image.tmdb.org/t/p/w185{{movie.moviedbImage}}" title="{{movie.movieID}}"/></td><td><strong>{{movie.imdbTitle}}</strong> ({{movie.imdbYear}}) [{{movie.imdbRating}}] {{movie.imdbPlot}}</td>
             </tr>
         </table>
     </div>

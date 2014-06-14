@@ -71,8 +71,9 @@ echo json_encode($movies); //only thing we should return is our completed json
 //Phase 3, we're using a SQL DB now!
 require("dbconn_lib.php");
 $connectionInfo = getConnectionString("MediaServer");
-$serverName = "home.cplsyx.com";
+$serverName = getSQLServerName();
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
+
 if( $conn !== false )
 {
     $query = sqlsrv_query($conn, 'SELECT * FROM [dbo].[Movies]');
@@ -80,18 +81,21 @@ if( $conn !== false )
     // Check if there were any records
     if ($query !== false)
     {
-        $row = json_encode(array(sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)));
+        $results_array = array();
+        while( $result = sqlsrv_fetch_array( $query, SQLSRV_FETCH_ASSOC) ) 
+        {
+            if($result != null)
+            {
+               $results_array[] = $result;
+            }
 
+           
+
+            
+        } 
+        echo json_encode($results_array);
         sqlsrv_free_stmt($query);
-    }
-    else
-    {
-        print_r( sqlsrv_errors());
-      
-    }
-
-    
+    }    
  
 }
-echo $row;
 ?>
