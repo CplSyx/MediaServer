@@ -39,5 +39,23 @@
             mlc.error = true;
         });
         
-    }]);   
+    }]);
+   
+//Step 3 - Add functionality for Twitter Bootstrap partials
+
+    app.controller('PageController', function($location) {
+        this.isActive = function(route) {
+            return route === $location.path();
+        }
+    });
+    
+    app.config(function($routeProvider) { //List of partial pages to display
+       
+        $routeProvider
+        .when('/movies', {templateUrl:'partials/movies.html', controller:'MovieListController'})
+        .when('/tvshows', {templateUrl:'partials/tvshows.html', controller:'TVShowController'})
+        .when('/other', {templateUrl:'partials/other.html', controller:'OtherMediaController'})
+        //.otherwise({redirectTo: '/overview.html'});
+    });
+    
 })();
