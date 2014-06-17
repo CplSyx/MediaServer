@@ -6,7 +6,11 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
     <script src="js/app.js"></script>
     <script src="js/progress.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+    <link href="//getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+    <link href="static/bower_components/angular-dialog-service/dialogs.css" rel="stylesheet">
+    
 </head>
 <body x-ng-controller="MovieListController as movListCtrl" class="text-center">
     <h3>Movie List</h3>
@@ -23,12 +27,13 @@
     <div x-ng-show="movListCtrl.loaded" class="center-block">
         <input x-ng-model="order" x-ng-init="order='imdbTitle'" type="radio" value="imdbTitle" x-ng-checked="movListCtrl.loaded">Sort Asc</input>
         <input x-ng-model="order" type="radio" value="-imdbTitle">Sort Desc</input>
+        <br>
+        <br>
+        Title Search: <input ng-model="searchbox.imdbTitle"> {{(movListCtrl.movies|filter:searchbox).length}} Movie(s)
         <br><br>
-        {{movListCtrl.movies.length}} Movies
-        <br><br>
-        <table style="margin-left:auto; margin-right:auto">
-            <tr x-ng-repeat="movie in movListCtrl.movies | orderBy:order"  x-ng-bind-html="movie.imdbTitle" ng-style="movie.watched == 1 && {'background-color': 'rgba(200,200,200,0.4)'} ||  {'background-color': 'rgba(0,255,0,0.3)'}">
-                <td><img height="100px" src="https://image.tmdb.org/t/p/w185{{movie.moviedbImage}}" title="{{movie.movieID}}"/></td><td><strong>{{movie.imdbTitle}}</strong> ({{movie.imdbYear}}) [{{movie.imdbRating}}] {{movie.imdbPlot}}</td>
+        <table style="margin-left:auto; margin-right:auto; width:80%">
+            <tr x-ng-repeat="movie in movListCtrl.movies | orderBy:order" x-ng-show="([movie] | filter:searchbox).length > 0"  x-ng-bind-html="movie.imdbTitle" ng-style="movie.watched == 1 && {'background-color': 'rgba(200,200,200,0.4)'} ||  {'background-color': 'rgba(0,255,0,0.3)'}">
+                <td><img height="200px" src="https://image.tmdb.org/t/p/w185{{movie.moviedbImage}}" title="{{movie.movieID}}"/></td><td><strong>{{movie.imdbTitle}}</strong> ({{movie.imdbYear}}) [{{movie.imdbRating}}*]<br>{{movie.imdbPlot}}</td>
             </tr>
         </table>
     </div>
