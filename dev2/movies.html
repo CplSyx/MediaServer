@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="mediaServer">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Sam Hissaund">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    
+    <title>Media Server</title>
+    <!-- Angular files -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script> <!-- ngRoute has been separated out of angular.js, so we need to include it here -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-resource.js"></script> <!-- ngResource has been separated out of angular.js, so we need to include it here -->
+    
+    <!-- Application files -->
+    <script src="js/movies.js"></script>
+    
+    <!-- Bootstrap core -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+    
+    <!-- Stylesheets -->
+    <link href="//getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+    <link href="//getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body data-ng-controller="PageController as pageCtrl" style="background-color:#B3B3B3;">
+
+  <div ng-app="myapp">
+
+   <div ng-controller="MovieListController as ctrl">
+       <div ng-show="!ctrl.movies.loaded">Loading... </div>
+       <div ng-show="ctrl.movies.error">Error </div>
+       <ul>
+            <li ng-repeat="movie in ctrl.movies.list">
+                {{ movie.movieID }}
+            </li>
+       </ul>
+ </div>
+            
+</div>
+</body>
+</html>

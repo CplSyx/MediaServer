@@ -1,0 +1,44 @@
+
+<div class="row" data-ng-show="movDetCtrl.loaded && !movDetCtrl.error">
+    <div class="col-md-3"><img class="mediadetail" src="https://image.tmdb.org/t/p/w780{{movDetCtrl.movie.moviedbImage}}"></div>
+    <div class="col-md-9">    
+        
+        <div class="page-header" ><h2><a style="color:#000000;" href="http://www.imdb.com/title/{{movDetCtrl.movie.imdbID}}">{{movDetCtrl.movie.imdbTitle}} ({{movDetCtrl.movie.imdbYear}})</a><h2></div>
+        <div class="row">
+            <div class="col-xs-4" style="background-image: url(images/star.png); height: 58px; width: 66px; text-align:center; font-weight:bold; line-height: 58px;"> <!-- set line height to centralise text -->
+                {{movDetCtrl.movie.imdbRating}}
+            </div>
+            <div class="col-xs-8" style="line-height:29px;"> <!-- line height set to half the line height of the above div, as there are 2 lines of text-->
+                {{movDetCtrl.movie.imdbGenre}}<br>
+                {{movDetCtrl.movie.imdbRuntime}}
+            </div>
+        </div>
+        <br> 
+        {{movDetCtrl.movie.imdbPlot}}<br><br> 
+
+        <div data-ng-hide="movDetCtrl.movie.watched" class="movieunwatched" data-ng-click="movDetCtrl.updateMovieWatched(1)">
+        
+        Not watched
+        
+        </div>    
+        
+        <div data-ng-show="movDetCtrl.movie.watched" class="moviewatched"  data-ng-click="movDetCtrl.updateMovieWatched(0)">
+        
+        Watched
+        
+        </div>   
+        <br>
+        <a href data-ng-click="showAdvancedInfo = !showAdvancedInfo">Advanced info</a>
+        <div data-ng-init="showAdvancedInfo = false" data-ng-show="showAdvancedInfo">
+        imdbID: {{movDetCtrl.movie.imdbID}}<br>
+        moviedbID: {{movDetCtrl.movie.moviedbID}}<br>
+        fileLocation: {{movDetCtrl.movie.fileLocation}}<br>        
+        </div>
+        <br><br>
+        <div class="btn-group" style='float:right'>
+            <label class="btn btn-success" data-ng-click="pageCtrl.link('movies/'+movDetCtrl.previousMovieID)">Prev</label>
+            <label class="btn btn-success" data-ng-click="pageCtrl.link('movies/'+movDetCtrl.nextMovieID)">Next</label>
+        </div>
+        
+    </div>
+</div>

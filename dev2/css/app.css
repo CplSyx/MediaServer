@@ -1,0 +1,65 @@
+.centerpage {
+	color:#000000;
+	background-color:#B3B3B3;
+	margin:0;
+    text-align:center;
+}
+
+.fullcontainer {
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+    width: 100%;
+    margin: 0 auto;
+}
+img.mediadetail {
+    border: 0;
+    width: 100%;
+    display: block;
+    max-width: 400px;
+}
+
+div.moviewatched{
+    height: 40px;
+    width: 150px;
+    border: 1px solid green;
+    text-align:center;
+    line-height:40px;
+    font-weight:bold;
+    color:green;
+    background-color: #B2FFB2;
+    cursor: pointer;
+}
+
+div.movieunwatched{
+    height: 40px;
+    width: 150px;
+    border: 1px solid red;
+    text-align:center;
+    line-height:40px;
+    font-weight:bold;
+    color:red;
+    background-color: #FFB2B2;
+    cursor: pointer;
+}
+
+a img {
+	border:none;
+}
+table.overviewtable {
+    width:628px;
+    height:357px;
+    margin-left:-314px; /* half of width */
+    margin-top:-300px;  /* half of height */
+    top:50%;
+    left:50%;
+    position:fixed;
+    border-spacing:0;
+    border-collapse: collapse;
+  }
+table.overviewtable td{
+    padding:10px;
+  }
+table.movielist tr:hover {
+    cursor: pointer;
+}

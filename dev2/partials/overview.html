@@ -1,1 +1,19 @@
-Overview
+<div class="fullcontainer">
+    <div class="page-header">
+        <p><a href="#/movies"><img src="images/movie.png" alt="Movies" title="Movies"/></a><a href="#"><img src="images/tv.png" alt="TV Shows" title="TV Shows"/></a></p>
+        <br>
+        <p><a href="http://home.cplsyx.com:8080"><img src="images/sabnzbd.png" alt=""/></a></p>
+        <br>
+        <p><a href="http://home.cplsyx.com:8081"><img src="images/sickbeard.png" alt=""/></p>
+        <br>
+        <p><a href="http://home.cplsyx.com:8082"><img src="images/cp.png" alt=""/></a></p>
+        <br>
+    </div>
+
+    <div data-ng-controller="MovieListController as movieCtrl" data-ng-show="movieCtrl.movies.loaded" class="page-header">
+    <h2>{{movieCtrl.movies.list.length}} Movies</h2>
+    <h4>(TV Shows TBC)</h4>
+    {{pageCtrl.date | date: "dd-MMM-yy HH:mm:ss"}}
+    </div>
+    
+</div>
