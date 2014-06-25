@@ -11,7 +11,7 @@
 
     
     <div data-ng-show="movListCtrl.movies.loaded" class="center-block">
-        <input data-ng-model="order" data-ng-init="order='imdbTitle'" type="radio" value="imdbTitle" data-ng-checked="movListCtrl.loaded">Sort Asc</input>
+        <input data-ng-model="order" data-ng-init="order='imdbTitle'" type="radio" value="imdbTitle" data-ng-checked="movListCtrl.movies.loaded">Sort Asc</input>
         <input data-ng-model="order" type="radio" value="-imdbTitle">Sort Desc</input>
         <br>
         <br>
@@ -19,7 +19,7 @@
         <br><br>
         <table class="movielist" style="margin-left:auto; margin-right:auto;">
             <tr data-ng-repeat="movie in movListCtrl.movies.list | orderBy:order" data-ng-show="([movie] | filter:searchbox).length > 0"   data-ng-style="movie.watched == 1 && {'background-color': 'rgba(200,200,200,0.4)'} ||  {'background-color': 'rgba(0,255,0,0.4)'}"  data-ng-click="pageCtrl.link('movies/'+movie.movieID)" >
-                <td style="padding-left: 5px;"><img height="100px" width="67px" src="https://image.tmdb.org/t/p/w185{{movie.moviedbImage}}" title="{{movie.movieID}}"/></td><td style="padding: 15px;"><strong>{{movie.imdbTitle}}</strong> ({{movie.imdbYear}}) [{{movie.imdbRating}}*]</td>
+                <td style="padding-left: 5px;"><img height="100px" width="67px" src="https://image.tmdb.org/t/p/w185{{movie.moviedbImage}}" title="{{movie.movieID}}"/></td><td style="padding: 15px;"><strong>{{movie.imdbTitle}}</strong> ({{movie.imdbYear}})</td>
             </tr>
         </table>
     </div>

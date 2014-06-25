@@ -1,0 +1,20 @@
+<?php
+require("dbconn_lib.php");
+
+if($_SERVER['REQUEST_METHOD'] == 'PUT') {
+    $putVars = json_decode(file_get_contents("php://input"), true);
+    $movieID = $putVars['movieid'];
+    $watched = $putVars['watched'];
+
+
+    $connectionInfo = getConnectionString("MediaServer");
+    $serverName = getSQLServerName();
+    $conn = sqlsrv_connect( $serverName, $connectionInfo);
+
+    if( $conn !== false )
+    {
+        $query = sqlsrv_query($conn, 'UPDATE [dbo].[Movies] SET watched='.mssql_escape($putVars['watched']).' WHERE movieID='.mssql_escape($putVars['movieid']));
+        sqlsrv_free_stmt($query);   
+    }
+}
+?>

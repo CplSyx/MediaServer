@@ -12,6 +12,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script> <!-- ngRoute has been separated out of angular.js, so we need to include it here -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-resource.js"></script> <!-- ngResource has been separated out of angular.js, so we need to include it here -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-touch.js"></script> <!-- ngTouch has been separated out of angular.js, so we need to include it here -->
     
     <!-- Application files -->
     <script src="js/app.js"></script>
@@ -33,7 +34,7 @@
     <![endif]-->
   </head>
 
-  <body data-ng-controller="PageController as pageCtrl" style="background-color:#B3B3B3;">
+  <body data-ng-controller="PageController as pageCtrl" style="background-color:#B3B3B3;" data-ng-keyup="pageCtrl.detectKey($event)" data-ng-swipe-left="pageCtrl.swipeLeft()" data-ng-swipe-right="pageCtrl.swipeRight()">
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-ng-controller="NavigationController as navCtrl">
       <div class="container-fluid">

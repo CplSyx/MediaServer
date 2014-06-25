@@ -34,11 +34,13 @@
         moviedbID: {{movDetCtrl.movie.moviedbID}}<br>
         fileLocation: {{movDetCtrl.movie.fileLocation}}<br>        
         </div>
-        <br><br>
-        <div class="btn-group" style='float:right'>
+        <br><br>                
+    </div>
+</div>
+<div data-ng-show="movDetCtrl.error">
+<h3> No data for movie id <em>{{movDetCtrl.movieID}}</em>.<br>Probably deleted from DB.</h3>
+</div>
+<div class="btn-group" style="float:right" tabindex="0" data-ng-keyup="movDetCtrl.onKeyPress($event)">
             <label class="btn btn-success" data-ng-click="pageCtrl.link('movies/'+movDetCtrl.previousMovieID)">Prev</label>
             <label class="btn btn-success" data-ng-click="pageCtrl.link('movies/'+movDetCtrl.nextMovieID)">Next</label>
-        </div>
-        
-    </div>
 </div>
