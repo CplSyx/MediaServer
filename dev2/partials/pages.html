@@ -1,0 +1,16 @@
+<div ng-controller="PaginationDemoCtrl as pC">
+<div ng-controller="MovieListController as movListCtrl">
+<div data-ng-show="movListCtrl.movies.loaded" class="center-block text-center" >
+    <pagination total-items="movListCtrl.movies.list.length" ng-change="pC.pageChanged()" ng-model="pC.currentPage" max-size="pC.maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="pC.numPages"></pagination>
+</div>
+
+    <table class="movielist" style="margin-left:auto; margin-right:auto; width:510px"><!--Can insert class="animateMovieList" into the tr for animation-->
+            <tr data-ng-repeat="movie in movListCtrl.movies.list | orderBy:'imdbTitle' | limitTo: pC.end | limitTo:-pC.itemsPerPage " data-ng-show="([movie] | filter:searchbox).length > 0" data-ng-style="movie.watched == 1 && {'background-color': 'rgba(200,200,200,0.4)'} ||  {'background-color': 'rgba(0,255,0,0.4)'}"  data-ng-click="pageCtrl.link('movies/'+movie.movieID)" >
+                <td style="padding-left: 5px;"><img height="100px" width="67px" src="https://image.tmdb.org/t/p/w185{{movie.moviedbImage}}" title="{{movie.movieID}}"/></td><td style="padding: 15px;"><strong>{{movie.imdbTitle}}</strong> ({{movie.imdbYear}})</td>
+            </tr>
+        </table>
+    
+    
+<div data-ng-show="movListCtrl.movies.loaded" class="center-block text-center" >
+    <pagination total-items="movListCtrl.movies.list.length" ng-change="pC.pageChanged()" ng-model="pC.currentPage" max-size="pC.maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="pC.numPages"></pagination>
+</div></div></div>

@@ -1,13 +1,32 @@
+<!--<div class="modal-header">
+        <h3 class="modal-title">MediaServer Login</h3>
+      </div>
+<div class="modal-body" data-ng-controller="LoginController as loginCtrl">
+    <form class="form-signin" role="form" name="form1">
+        
+        <input type="username" class="form-control" placeholder="Username" required autofocus data-ng-model="user.username">
+        <input type="password" class="form-control" placeholder="Password" required data-ng-model="user.password">
+        <label class="checkbox">
+            <input type="checkbox" value="remember-me" data-ng-model="user.remember"> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" data-ng-disabled="form1.$invalid" data-ng-click="loginCtrl.login(user)">Sign in</button>
+    </form>
+    &gt;{{loginCtrl.result}}
+</div>    
+<div class="modal-footer">
+    <button class="btn btn-default" data-ng-click="modal.dismiss()">Cancel</button>
+</div>-->
+
 <div class="modal-header">
         <h3 class="modal-title">MediaServer Login</h3>
       </div>
 <div class="modal-body">
-    <form class="form-signin" role="form">
+    <form class="form-signin" role="form" name="form1">
         
         <input type="username" class="form-control" placeholder="Username" required autofocus>
         <input type="password" class="form-control" placeholder="Password" required>
         <label class="checkbox">
-            <input type="checkbox" value="remember-me"> Remember me
+            <input type="checkbox" value="remember-me" data-ng-model="user.remember"> Remember me
         </label>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>

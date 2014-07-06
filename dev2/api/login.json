@@ -1,0 +1,28 @@
+<?php
+
+require("../secure/userlist.php"); //provides $userList variable, containing users for the site.
+
+function checkLogin($user, $password, $listOfUsers) {
+   foreach ($listOfUsers as $userID => $userDetails) {
+       if ($userDetails[Username] == $user && $userDetails[Password] == hash("sha256", $password)) {
+           return array("Username" => $userDetails[Username], "UserLevel" => $userDetails[UserLevel]);
+       }
+   }
+   return array("Username" => null, "UserLevel" => -1); //We can use -1 to indicate a failed login.
+}
+
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $postVars = json_decode(file_get_contents("php://input"), true);
+    $username = $postVars['username'];
+    $password = $postVars['password'];
+    
+    $loginResult = checkLogin($username, $password, $userList);
+    if($loginResult[UserLevel] != -1)
+    {
+        session_start();
+        $_SESSION['uid'] = uniqid("MediaServer_");        
+        $loginResult['uid'] = $_SESSION['uid'];
+    }
+    echo json_encode($loginResult);
+}
+?>

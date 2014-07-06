@@ -63,3 +63,41 @@ table.overviewtable td{
 table.movielist tr:hover {
     cursor: pointer;
 }
+
+.movieDetailSlide.ng-enter, .movieDetailSlide.ng-leave {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:600px;
+}
+
+.movieDetailSlide.ng-enter {
+  left:100%;
+}
+.movieDetailSlide.ng-enter.ng-enter-active {
+  left:0;
+}
+
+.movieDetailSlide.ng-leave {
+ left:0;
+}
+.movieDetailSlide.ng-leave.ng-leave-active {
+  left:-100%;
+}
+
+.animateMovieList.ng-hide-add,
+.animateMovieList.ng-hide-remove {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+
+  /* remember to add this */
+  display:block!important;
+  opacity:1;
+}
+.animateMovieList.ng-hide {
+  opacity:0;
+}

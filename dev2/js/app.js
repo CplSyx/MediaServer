@@ -20,9 +20,9 @@
 
 
 //Step 2 - process from an external source
-(function(){
 
-    var app = angular.module('mediaServer', ['ngResource', 'ngRoute', 'ui.bootstrap', 'ngTouch', 'ng']); //As ngRoute is not part of angular.js we must inject the dependency here in order to use $routeProvider later on
+
+    var app = angular.module('mediaServer', ['ngResource', 'ngRoute', 'ui.bootstrap', 'ngTouch', 'ngAnimate', 'ng']); //As ngRoute is not part of angular.js we must inject the dependency here in order to use $routeProvider later on
 
     app.factory('movieList', function($http) {
         var movies = {
@@ -125,6 +125,7 @@
             $location.path(url);
         }
         
+        
         //Detect Keypresses on application to deal with them
         this.detectKey = function(event) {
             if (event.which==37) //LeftArrow
@@ -160,10 +161,10 @@
             if( /^\/movies\/[0-9]+$/.test($location.path())) //Deal with moviedetails page
             {
                 var matches = $location.path().match(/([0-9]+)$/);
-                var alteration = -1;
+                var alteration = 1;
                 if(direction == "r")
                 {
-                    alteration = 1;
+                    alteration = -1;
                 }
                 this.link("/movies/"+(parseInt(matches[0]) +(alteration)));
             }
@@ -176,6 +177,26 @@
     app.controller('NavigationController', function(){
         this.isCollapsed = true;
     });
+
+    app.controller('PaginationDemoCtrl', ['movieList', function(movies) {
+        this.totalItems = movies.list.length;
+        this.currentPage = 1;
+        this.itemsPerPage = 8;
+        this.end = this.currentPage*this.itemsPerPage;
+        this.start = this.end - this.itemsPerPage;
+        
+        this.setPage = function (pageNo) { //Not used at present, copied from example
+            this.currentPage = pageNo;
+        };
+
+        this.pageChanged = function() {
+            console.log('Page changed to: ' + this.currentPage);
+            this.end = this.currentPage*this.itemsPerPage;
+            this.start = this.end - this.itemsPerPage;
+        };
+
+        this.maxSize = 5; //Number of pages to display as clickable at once
+    }]);
 
 /***** MODALS START *****/    
     //Controller for individual modals
@@ -232,24 +253,11 @@
         .when('/movies', {templateUrl:'partials/movies.html', controller:'MovieListController as movListCtrl'})
         .when('/movies/:movieid', {templateUrl:'partials/moviedetail.html', controller:'MovieDetailsController as movDetCtrl'})
         .when('/tvshows', {templateUrl:'partials/tvshows.html'})
+        .when('/pages', {templateUrl:'partials/pages.html'})
         .when('/other', {templateUrl:'partials/other.html'})
         .otherwise({redirectTo: '/overview'});
     });
 
 
-//Handle keypress events that are on the page - anywhere
-    /*var handler = function(e){
-        if(e.which === 39) {
-          console.log('right arrow');
-          // $scope.doSomething();
-        }      
-    };
 
-    var $doc = angular.element(document);
-
-    $doc.on('keydown', handler);
-    $scope.$on('$destroy',function(){
-        $doc.off('keydown', handler);
-    })   */ 
-
-})();
+    
